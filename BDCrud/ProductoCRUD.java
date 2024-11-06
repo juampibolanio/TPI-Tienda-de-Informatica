@@ -24,7 +24,7 @@ public class ProductoCRUD {
             int rowCount = psmt.executeUpdate();
             System.out.println("Producto agregado exitosamente: " + rowCount + " filas afectadas.");
         } catch (SQLException e) {
-            System.out.println("Error al conectar con la base de dato: " + e.getMessage());
+            System.out.println("Error al conectar con la base de datos: " + e.getMessage());
         }
     }
 
@@ -47,5 +47,5 @@ public class ProductoCRUD {
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
         }
-    }
+    }//falta hacer clave foranea
 }
