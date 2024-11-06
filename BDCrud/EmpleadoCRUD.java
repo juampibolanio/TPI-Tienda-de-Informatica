@@ -48,7 +48,7 @@ public class EmpleadoCRUD {
         }
     }
 
-    public void actualizarEmpleado(int idempleado, String nombre, String apellido, String puesto, String telefono){
+    public void actualizarEmpleado(String nombre, String apellido, String puesto, String telefono, int idempleado){
         try{
             Connection conn = conexion.conectarBD();
             String sql = "UPDATE empleado SET nombre = ?, apellido = ?, puesto = ?, telefono = ? WHERE idempleado = ?";
