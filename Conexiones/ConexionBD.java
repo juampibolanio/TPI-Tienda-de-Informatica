@@ -1,3 +1,5 @@
+package Conexiones;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,13 +14,17 @@ public class ConexionBD {
     PreparedStatement psmt = null;
     ResultSet rs = null;
 
-    public void conectarBD() {
+    public Connection conectarBD() {
         try {
             conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Conexión establecida correctamente.");
         } catch (SQLException e) {
-            System.out.println("Error al conectar con la base de datos " + e.getMessage());
+            System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+            conn = null;
         }
+        return conn;
     }
+
 
     public void cerrarConexionBD() {
         try {
