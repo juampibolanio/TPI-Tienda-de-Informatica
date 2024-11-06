@@ -47,5 +47,5 @@ public class ProductoCRUD {
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
         }
-    }//falta hacer clave foranea
+    }
 }
