@@ -69,9 +69,8 @@ public class ClienteCRUD {
             Connection conn = conexion.conectarBD();
             String sql = "DELETE FROM cliente WHERE idcliente = ?";
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt = conn.prepareStatement(sql);
             psmt.setInt(1, idcliente);
-            int rowCount= psmt.executeUpdate();
+            int rowCount = psmt.executeUpdate();
             System.out.println("Número de filas afectadas: " + rowCount);
         }catch (SQLException e){
             System.out.println("Error al conectar a la base de datos: "+ e.getMessage());
