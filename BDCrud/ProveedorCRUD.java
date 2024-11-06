@@ -46,7 +46,7 @@ public class ProveedorCRUD {
         }
     }
 
-    public void actualizarCliente(String nombre, String telefono, String email, int idempleado){
+    public void actualizarCliente(String nombre, String telefono, String email, int idproveedor){
         try{
             Connection conn = conexion.conectarBD();
             String sql = "UPDATE proveedor SET nombre = ?, telefono = ?, email = ? WHERE idproveedor = ?)";
