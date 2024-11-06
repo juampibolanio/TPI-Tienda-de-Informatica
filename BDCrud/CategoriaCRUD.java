@@ -38,15 +38,34 @@ public class CategoriaCRUD {
                 System.out.println(idcategoria + "/t" + nombre);
             }
         } catch (SQLException e) {
-            System.out.println("Error de conexión: " + e.getMessage());
+            System.out.println("Error de conexión con la base de datos: " + e.getMessage());
         }
     }
 
-    public void actualizarCategoria() {
-
+    public void actualizarCategoria(String nombre, int idcategoria){
+        try{
+            Connection conn = conexion.conectarBD();
+            String sql = "UPDATE empleado SET nombre = ? WHERE idcategoria = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, nombre);
+            psmt.setInt(2, idcategoria);
+            int rowCount = psmt.executeUpdate();
+            System.out.println("Número de filas afectadas: " + rowCount);
+        }catch (SQLException e){
+            System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+        }
     }
 
-    public void eliminarCategoria() {
-
+    public void eliminarCategoria(int idcategoria){
+        try{
+            Connection conn = conexion.conectarBD();
+            String sql = "DELETE FROM categoria WHERE idcategoria = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idcategoria);
+            int rowCount = psmt.executeUpdate();
+            System.out.println("Número de filas afectadas: " + rowCount);
+        }catch (SQLException e){
+            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+        }
     }
 }
