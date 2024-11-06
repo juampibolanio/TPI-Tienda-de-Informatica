@@ -70,7 +70,6 @@ public class EmpleadoCRUD {
             Connection conn = conexion.conectarBD();
             String sql = "DELETE FROM empleado WHERE idempleado = ?";
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt = conn.prepareStatement(sql);
             psmt.setInt(1, idempleado);
             int rowCount = psmt.executeUpdate();
             System.out.println("Número de filas afectadas: " + rowCount);
