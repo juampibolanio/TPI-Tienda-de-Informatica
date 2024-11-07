@@ -13,7 +13,7 @@ public class EmpleadoCRUD {
         this.conexion = conexion;
     }
 
-    public void agregarEmpleado(String nombre, String apellido, String puesto, String telefono){
+    public void agregarEmpleados(String nombre, String apellido, String puesto, String telefono){
         try{
             Connection conn = conexion.conectarBD();
             String sql = "INSERT INTO empleados (nombre, apellido, puesto, telefono) VALUES (?, ?, ?, ?)";
@@ -29,7 +29,7 @@ public class EmpleadoCRUD {
         }
     }
 
-    public void mostrarProductos(){
+    public void mostrarEmpleados(){
         try{
             Connection conn = conexion.conectarBD();
             String sql = "SELECT * FROM empleado";
@@ -41,14 +41,14 @@ public class EmpleadoCRUD {
                 String apellido = rs.getString("apellido");
                 String puesto =  rs.getString("puesto");
                 String telefono = rs.getString("telefono");
-                System.out.println(nombre + "/t" + apellido + "/t" + puesto + "/t" + telefono);
+                System.out.println(nombre + "\t" + apellido + "\t" + puesto + "\t" + telefono);
             }
         }catch (SQLException e){
             System.out.println("Error de conexión: " + e.getMessage());
         }
     }
 
-    public void actualizarEmpleado(String nombre, String apellido, String puesto, String telefono, int idempleado){
+    public void actualizarEmpleados(String nombre, String apellido, String puesto, String telefono, int idempleado){
         try{
             Connection conn = conexion.conectarBD();
             String sql = "UPDATE empleado SET nombre = ?, apellido = ?, puesto = ?, telefono = ? WHERE idempleado = ?";
@@ -65,7 +65,7 @@ public class EmpleadoCRUD {
         }
     }
 
-    public void eliminarEmpleado(int idempleado){
+    public void eliminarEmpleados(int idempleado){
         try{
             Connection conn = conexion.conectarBD();
             String sql = "DELETE FROM empleado WHERE idempleado = ?";

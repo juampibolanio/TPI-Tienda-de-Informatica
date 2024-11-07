@@ -15,14 +15,14 @@ public class ClienteCRUD {
     public void agregarCliente(String nombre, String apellido, String email, String telefono){
         try{
             Connection conn = conexion.conectarBD();
-            String sql = "INSERT INTO cliente (nombre, apellido, puesto, telefono) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO cliente (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, nombre);
             pstm.setString(2, apellido);
             pstm.setString(3, email);
             pstm.setString(4, telefono);
             int rowCount = pstm.executeUpdate();
-            System.out.println("Empleado agregado exitosamente: " + rowCount + "filas afectadas.");
+            System.out.println("Cliente agregado exitosamente: " + rowCount + " filas afectadas.");
         }catch(SQLException e){
             System.out.println("Error al conectar la base de datos. " + e.getMessage());
         }
@@ -40,7 +40,7 @@ public class ClienteCRUD {
                 String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
                 String telefono = rs.getString("telefono");
-                System.out.println(nombre + "/t" + apellido + "/t" + email + "/t" + telefono);
+                System.out.println(nombre + "\t" + apellido + "\t" + email + "\t" + telefono);
             }
         }catch (SQLException e){
             System.out.println("Error de conexión: " + e.getMessage());
