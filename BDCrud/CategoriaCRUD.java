@@ -19,7 +19,7 @@ public class CategoriaCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setString(1, nombre);
             int rowCount = psmt.executeUpdate();
-            System.out.println("Categoria agregada exitosamente.");
+            System.out.println("Categoría agregada exitosamente: " + rowCount + " filas afectadas.");
         } catch (SQLException e) {
             System.out.println("Error de conexión con la base de datos: " + e.getMessage());
         }
@@ -32,10 +32,11 @@ public class CategoriaCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
+            System.out.println(String.format("%-10s%-20s", "IdCategoria", "Nombre"));
             while (rs.next()) {
                 int idcategoria = rs.getInt("idcategoria");
                 String nombre = rs.getString("nombre");
-                System.out.println(idcategoria + "/t" + nombre);
+                System.out.println(String.format("%-10d%-20s", idcategoria, nombre));
             }
         } catch (SQLException e) {
             System.out.println("Error de conexión con la base de datos: " + e.getMessage());
@@ -45,7 +46,7 @@ public class CategoriaCRUD {
     public void actualizarCategoria(String nombre, int idcategoria){
         try{
             Connection conn = conexion.conectarBD();
-            String sql = "UPDATE empleado SET nombre = ? WHERE idcategoria = ?";
+            String sql = "UPDATE categoria SET nombre = ? WHERE idcategoria = ?";
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setString(1, nombre);
             psmt.setInt(2, idcategoria);
