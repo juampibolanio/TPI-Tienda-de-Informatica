@@ -24,7 +24,6 @@ public class ClienteUI extends JPanel {
 
         setSize(700, 600);
 
-
         // Panel de formulario
         JPanel formularioPanel = new JPanel();
         formularioPanel.setLayout(new GridLayout(5, 3));
@@ -139,8 +138,6 @@ public class ClienteUI extends JPanel {
         return clientes;
     }
 
-
-
     // Método para agregar un nuevo cliente a la base de datos
     private boolean agregarCliente(String nombre, String apellido, String email, String telefono) {
         String query = "INSERT INTO cliente (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
@@ -155,7 +152,6 @@ public class ClienteUI extends JPanel {
             e.printStackTrace();
             return false;
         }
-
     }
 
     // Método para eliminar un cliente de la base de datos
@@ -173,8 +169,17 @@ public class ClienteUI extends JPanel {
 
     // Método para confirmar la eliminación de un cliente
     private boolean confirmarEliminacion(String idcliente) {
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este cliente?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-        return respuesta == JOptionPane.YES_OPTION;
+        Object[] options = { "Sí", "No" };
+        int respuesta = JOptionPane.showOptionDialog(
+                null,
+                "¿Estás seguro de eliminar este cliente?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]  // El primer botón ("Sí")
+        );
+        return respuesta == 0;  // 0 para "Sí", 1 para "No"
     }
-
 }
