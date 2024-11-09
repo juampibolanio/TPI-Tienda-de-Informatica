@@ -38,7 +38,11 @@ public class ProductoCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-            System.out.println(String.format("%-10s%-20s%-10s%-10s%-20s%-20s", "IdProducto", "Nombre", "Precio", "Stock", "Marca", "Categoría"));
+
+            System.out.printf("%-15s%-15s%-10s%-10s%-20s%-20s%n", "IdProducto", "Nombre", "Precio", "Stock", "Marca", "Categoría");
+            System.out.println("--------------------------------------------------------------------------------------");
+
+
             while (rs.next()) {
                 int idproducto = rs.getInt("idproducto");
                 String nombre = rs.getString("nombre");
@@ -46,12 +50,14 @@ public class ProductoCRUD {
                 int stock = rs.getInt("stock");
                 String marca = rs.getString("marca");
                 String categoria = rs.getString("nombre");
-                System.out.println(String.format("%-10d%-20s%-10.2f%-10d%-20s%-20s", idproducto, nombre, precio, stock, marca, categoria));
+                System.out.printf("%-10d%-20s%-10.2f%-10d%-20s%-20s%n", idproducto, nombre, precio, stock, marca, categoria);
             }
+
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
         }
     }
+
 
     public void actualizarProducto(int idproducto, String nombre, double precio, int stock, String marca, int idcategoria){
         try {

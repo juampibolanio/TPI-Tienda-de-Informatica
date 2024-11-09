@@ -32,16 +32,22 @@ public class CategoriaCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-            System.out.println(String.format("%-10s%-20s", "IdCategoria", "Nombre"));
+
+            System.out.printf("%-15s%-30s%n", "IdCategoria", "Nombre");
+            System.out.println("--------------------------------------------------");
+
+
             while (rs.next()) {
                 int idcategoria = rs.getInt("idcategoria");
                 String nombre = rs.getString("nombre");
-                System.out.println(String.format("%-10d%-20s", idcategoria, nombre));
+                System.out.printf("%-15d%-30s%n", idcategoria, nombre);
             }
+
         } catch (SQLException e) {
             System.out.println("Error de conexión con la base de datos: " + e.getMessage());
         }
     }
+
 
     public void actualizarCategoria(String nombre, int idcategoria){
         try{
