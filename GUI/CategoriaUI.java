@@ -96,13 +96,7 @@ public class CategoriaUI extends JPanel {
                         int idCategoria = Integer.parseInt(idCategoriaText);
 
                         // Mostrar mensaje de confirmación antes de eliminar
-                        int confirm = JOptionPane.showConfirmDialog(null,
-                                "¿Estás seguro de que quieres eliminar esta categoría?",
-                                "Confirmar eliminación",
-                                JOptionPane.YES_NO_OPTION);
-
-                        // Si el usuario hace clic en "Sí"
-                        if (confirm == JOptionPane.YES_OPTION) {
+                        if (confirmarEliminacion(idCategoria)) {
                             categoriaCRUD.eliminarCategoria(idCategoria);
                             cargarCategorias();
                             productoUI.cargarCategorias();  // Actualizamos las categorías en ProductoUI después de eliminar
@@ -124,6 +118,23 @@ public class CategoriaUI extends JPanel {
         cargarCategorias();
     }
 
+    // Método para confirmar la eliminación de la categoría
+    private boolean confirmarEliminacion(int idCategoria) {
+        Object[] options = { "Sí", "No" };
+        int respuesta = JOptionPane.showOptionDialog(
+                null,
+                "¿Estás seguro de eliminar esta categoría?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]  // El primer botón ("Sí")
+        );
+        return respuesta == 0;  // 0 para "Sí", 1 para "No"
+    }
+
+    // Método para cargar las categorías desde la base de datos
     private void cargarCategorias() {
         DefaultTableModel model = (DefaultTableModel) tablaCategorias.getModel();
         model.setRowCount(0);

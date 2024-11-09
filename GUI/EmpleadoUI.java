@@ -140,7 +140,17 @@ public class EmpleadoUI extends JPanel {
 
     // Método para confirmar la eliminación de un empleado
     private boolean confirmarEliminacion(int idempleado) {
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este empleado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-        return respuesta == JOptionPane.YES_OPTION;
+        Object[] options = { "Sí", "No" };
+        int respuesta = JOptionPane.showOptionDialog(
+                null,
+                "¿Estás seguro de eliminar este empleado?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]  // El primer botón ("Sí")
+        );
+        return respuesta == 0;  // 0 para "Sí", 1 para "No"
     }
 }

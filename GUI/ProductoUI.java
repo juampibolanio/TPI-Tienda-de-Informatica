@@ -116,11 +116,18 @@ public class ProductoUI extends JPanel {
                     }
 
                     if (idProducto != -1) {
-                        // Mostrar mensaje de confirmación
-                        int confirm = JOptionPane.showConfirmDialog(null,
+                        // Mostrar mensaje de confirmación con botones en español
+                        Object[] options = { "Sí", "No" };
+                        int confirm = JOptionPane.showOptionDialog(
+                                null,
                                 "¿Estás seguro de que quieres eliminar este producto?",
                                 "Confirmar eliminación",
-                                JOptionPane.YES_NO_OPTION);
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                options,
+                                options[0]  // El primer botón ("Sí")
+                        );
 
                         // Si el usuario hace clic en "Sí"
                         if (confirm == JOptionPane.YES_OPTION) {

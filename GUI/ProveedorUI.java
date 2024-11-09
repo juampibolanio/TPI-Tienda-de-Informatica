@@ -139,7 +139,18 @@ public class ProveedorUI extends JPanel {
 
     // Método para confirmar la eliminación de un proveedor
     private boolean confirmarEliminacion(int idproveedor) {
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este proveedor?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        // Uso de showOptionDialog para personalizar los botones de confirmación
+        Object[] opciones = {"Sí", "No"};
+        int respuesta = JOptionPane.showOptionDialog(
+                null,
+                "¿Estás seguro de eliminar este proveedor?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0] // El primer botón ("Sí")
+        );
         return respuesta == JOptionPane.YES_OPTION;
     }
 }
