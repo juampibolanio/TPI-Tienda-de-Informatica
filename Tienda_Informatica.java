@@ -19,14 +19,18 @@ public class Tienda_Informatica {
         ProveedorCRUD proveedorCRUD = new ProveedorCRUD(conexionBD);
 
         while (true) {
-            System.out.println("\n===== Menú Principal =====");
-            System.out.println("1. Gestionar Categorías");
-            System.out.println("2. Gestionar Clientes");
-            System.out.println("3. Gestionar Empleados");
-            System.out.println("4. Gestionar Productos");
-            System.out.println("5. Gestionar Proveedores");
-            System.out.println("6. Salir");
+            System.out.print("\n=========================");
+            System.out.print("\n     Menú Principal ");
+            System.out.println("\n=========================");
+            System.out.println("1- Gestionar Categorías");
+            System.out.println("2- Gestionar Clientes");
+            System.out.println("3- Gestionar Empleados");
+            System.out.println("4- Gestionar Productos");
+            System.out.println("5- Gestionar Proveedores");
+            System.out.print("6- Salir");
+            System.out.println("\n=========================");
             System.out.print("Seleccione una opción: ");
+
 
             int opcion = scanner.nextInt();
             scanner.nextLine();  // Limpiar buffer de scanner
@@ -60,12 +64,15 @@ public class Tienda_Informatica {
     // Menú para gestionar categorías
     private static void menuCategorias(Scanner scanner, CategoriaCRUD categoriaCRUD) {
         while (true) {
-            System.out.println("\n===== Gestión de Categorías =====");
-            System.out.println("1. Agregar Categoría");
-            System.out.println("2. Mostrar Categorías");
-            System.out.println("3. Actualizar Categoría");
-            System.out.println("4. Eliminar Categoría");
-            System.out.println("5. Volver al Menú Principal");
+            System.out.print("\n=============================");
+            System.out.print("\n   Gestión de Categorías");
+            System.out.println("\n=============================");
+            System.out.println("1- Agregar Categoría");
+            System.out.println("2- Mostrar Categorías");
+            System.out.println("3- Actualizar Categoría");
+            System.out.println("4- Eliminar Categoría");
+            System.out.print("5- Volver al Menú Principal");
+            System.out.println("\n============================");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -104,12 +111,15 @@ public class Tienda_Informatica {
     // Menú para gestionar clientes
     private static void menuClientes(Scanner scanner, ClienteCRUD clienteCRUD) {
         while (true) {
-            System.out.println("\n===== Gestión de Clientes =====");
-            System.out.println("1. Agregar Cliente");
-            System.out.println("2. Mostrar Clientes");
-            System.out.println("3. Actualizar Cliente");
-            System.out.println("4. Eliminar Cliente");
-            System.out.println("5. Volver al Menú Principal");
+            System.out.print("\n============================");
+            System.out.print("\n     Gestión de Clientes ");
+            System.out.println("\n============================");
+            System.out.println("1- Agregar Cliente");
+            System.out.println("2- Mostrar Clientes");
+            System.out.println("3- Actualizar Cliente");
+            System.out.println("4- Eliminar Cliente");
+            System.out.print("5- Volver al Menú Principal");
+            System.out.println("\n============================");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -160,12 +170,15 @@ public class Tienda_Informatica {
     // Menú para gestionar empleados
     private static void menuEmpleados(Scanner scanner, EmpleadoCRUD empleadoCRUD) {
         while (true) {
-            System.out.println("\n===== Gestión de Empleados =====");
-            System.out.println("1. Agregar Empleado");
-            System.out.println("2. Mostrar Empleados");
-            System.out.println("3. Actualizar Empleado");
-            System.out.println("4. Eliminar Empleado");
-            System.out.println("5. Volver al Menú Principal");
+            System.out.print("\n============================");
+            System.out.print("\n    Gestión de Empleados ");
+            System.out.println("\n============================");
+            System.out.println("1- Agregar Empleado");
+            System.out.println("2- Mostrar Empleados");
+            System.out.println("3- Actualizar Empleado");
+            System.out.println("4- Eliminar Empleado");
+            System.out.print("5- Volver al Menú Principal");
+            System.out.println("\n============================");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -216,12 +229,15 @@ public class Tienda_Informatica {
     // Menú para gestionar productos
     private static void menuProductos(Scanner scanner, ProductoCRUD productoCRUD) {
         while (true) {
-            System.out.println("\n===== Gestión de Productos =====");
-            System.out.println("1. Agregar Producto");
-            System.out.println("2. Mostrar Productos");
-            System.out.println("3. Actualizar Producto");
-            System.out.println("4. Eliminar Producto");
-            System.out.println("5. Volver al Menú Principal");
+            System.out.print("\n============================");
+            System.out.print("\n    Gestión de Productos ");
+            System.out.println("\n============================");
+            System.out.println("1- Agregar Producto");
+            System.out.println("2- Mostrar Productos");
+            System.out.println("3- Actualizar Producto");
+            System.out.println("4- Eliminar Producto");
+            System.out.print("5- Volver al Menú Principal");
+            System.out.println("\n============================");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -278,12 +294,15 @@ public class Tienda_Informatica {
     // Menú para gestionar proveedores
     private static void menuProveedores(Scanner scanner, ProveedorCRUD proveedorCRUD) {
         while (true) {
-            System.out.println("\n===== Gestión de Proveedores =====");
-            System.out.println("1. Agregar Proveedor");
-            System.out.println("2. Mostrar Proveedores");
-            System.out.println("3. Actualizar Proveedor");
-            System.out.println("4. Eliminar Proveedor");
-            System.out.println("5. Volver al Menú Principal");
+            System.out.print("\n============================");
+            System.out.print("\n    Gestión de Proveedores ");
+            System.out.println("\n============================");
+            System.out.println("1- Agregar Proveedor");
+            System.out.println("2- Mostrar Proveedores");
+            System.out.println("3- Actualizar Proveedor");
+            System.out.println("4- Eliminar Proveedor");
+            System.out.print("5- Volver al Menú Principal");
+            System.out.println("\n============================");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -315,14 +334,14 @@ public class Tienda_Informatica {
                     proveedorCRUD.actualizarProveedor(nuevoNombreProveedor, nuevoTelefonoProveedor, nuevoEmailProveedor, idProveedorActualizar);
                     break;
                 case 4:
-                    System.out.print(" -Ingrese el ID del proveedor a eliminar: ");
+                    System.out.print("Ingrese el ID del proveedor a eliminar: ");
                     int idProveedorEliminar = scanner.nextInt();
                     proveedorCRUD.eliminarProveedor(idProveedorEliminar);
                     break;
                 case 5:
                     return;
                 default:
-                    System.out.println("- Opción no válida.");
+                    System.out.println("Opción no válida.");
             }
         }
     }
