@@ -16,7 +16,7 @@ public class EmpleadoCRUD {
     public void agregarEmpleados(String nombre, String apellido, String puesto, String telefono){
         try{
             Connection conn = conexion.conectarBD();
-            String sql = "INSERT INTO empleados (nombre, apellido, puesto, telefono) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO empleado (nombre, apellido, puesto, telefono) VALUES (?, ?, ?, ?)";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, nombre);
             pstm.setString(2, apellido);
