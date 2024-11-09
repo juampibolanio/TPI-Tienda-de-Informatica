@@ -322,7 +322,7 @@ public class Tienda_Informatica {
                 case 5:
                     return;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("- Opción no válida.");
             }
         }
     }
