@@ -28,24 +28,30 @@ public class ClienteCRUD {
         }
     }
 
-    public void mostrarCliente(){
-        try{
+    public void mostrarCliente() {
+        try {
             Connection conn = conexion.conectarBD();
             String sql = "SELECT * FROM cliente";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-            while (rs.next()){
+            System.out.printf("%-20s%-20s%-30s%-15s%n", "Nombre", "Apellido", "Email", "Teléfono");
+            System.out.println("--------------------------------------------------------------------------");
+
+
+            while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
                 String telefono = rs.getString("telefono");
-                System.out.println(nombre + "\t" + apellido + "\t" + email + "\t" + telefono);
+                System.out.printf("%-20s%-20s%-30s%-15s%n", nombre, apellido, email, telefono);
             }
-        }catch (SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
         }
     }
+
 
     public void actualizarCliente(String nombre, String apellido, String email, String telefono, int idcliente){
         try {

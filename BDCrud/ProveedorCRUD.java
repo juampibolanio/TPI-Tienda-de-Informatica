@@ -28,24 +28,30 @@ public class ProveedorCRUD {
         }
     }
 
-    public void mostrarProveedor(){
-        try{
+    public void mostrarProveedor() {
+        try {
             Connection conn = conexion.conectarBD();
             String sql = "SELECT * FROM proveedor";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-            System.out.println(String.format("%-20s%-15s%-30s", "Nombre", "Telefono", "Email"));
-            while (rs.next()){
+
+            System.out.printf("%-20s%-15s%-30s%n", "Nombre", "Teléfono", "Email");
+            System.out.println("---------------------------------------------------------------");
+
+
+            while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String telefono = rs.getString("telefono");
                 String email = rs.getString("email");
-                System.out.println(String.format("%-20s%-15s%-30s", nombre, telefono, email));
+                System.out.printf("%-20s%-15s%-30s%n", nombre, telefono, email);
             }
-        }catch (SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
         }
     }
+
 
     public void actualizarProveedor(String nombre, String telefono, String email, int idproveedor){
         try{

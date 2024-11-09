@@ -16,7 +16,7 @@ public class EmpleadoCRUD {
     public void agregarEmpleados(String nombre, String apellido, String puesto, String telefono){
         try{
             Connection conn = conexion.conectarBD();
-            String sql = "INSERT INTO empleados (nombre, apellido, puesto, telefono) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO empleado (nombre, apellido, puesto, telefono) VALUES (?, ?, ?, ?)";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, nombre);
             pstm.setString(2, apellido);
@@ -29,24 +29,31 @@ public class EmpleadoCRUD {
         }
     }
 
-    public void mostrarEmpleados(){
-        try{
+    public void mostrarEmpleados() {
+        try {
             Connection conn = conexion.conectarBD();
             String sql = "SELECT * FROM empleado";
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-            while(rs.next()){
+
+            System.out.printf("%-20s%-20s%-20s%-15s%n", "Nombre", "Apellido", "Puesto", "Teléfono");
+            System.out.println("-------------------------------------------------------------------");
+
+
+            while (rs.next()) {
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
-                String puesto =  rs.getString("puesto");
+                String puesto = rs.getString("puesto");
                 String telefono = rs.getString("telefono");
-                System.out.println(nombre + "\t" + apellido + "\t" + puesto + "\t" + telefono);
+                System.out.printf("%-20s%-20s%-20s%-15s%n", nombre, apellido, puesto, telefono);
             }
-        }catch (SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Error de conexión: " + e.getMessage());
         }
     }
+
 
     public void actualizarEmpleados(String nombre, String apellido, String puesto, String telefono, int idempleado){
         try{
