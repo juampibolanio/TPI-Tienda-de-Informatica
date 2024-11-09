@@ -315,7 +315,7 @@ public class Tienda_Informatica {
                     proveedorCRUD.actualizarProveedor(nuevoNombreProveedor, nuevoTelefonoProveedor, nuevoEmailProveedor, idProveedorActualizar);
                     break;
                 case 4:
-                    System.out.print("Ingrese el ID del proveedor a eliminar: ");
+                    System.out.print(" -Ingrese el ID del proveedor a eliminar: ");
                     int idProveedorEliminar = scanner.nextInt();
                     proveedorCRUD.eliminarProveedor(idProveedorEliminar);
                     break;
