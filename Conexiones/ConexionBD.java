@@ -19,7 +19,7 @@ public class ConexionBD {
 
     public ConexionBD() {
         Properties props = new Properties();
-        try (FileInputStream input = new FileInputStream("config/database.properties")) {
+        try (FileInputStream input = new FileInputStream("TPI-Tienda-de-Informatica/config/database.properties")) {
             props.load(input);
             url = props.getProperty("db.url");
             user = props.getProperty("db.user");
@@ -30,13 +30,12 @@ public class ConexionBD {
     }
 
     public Connection conectarBD() {
-        try {
-            conn = DriverManager.getConnection(url, user, password);
-            System.out.println("Conexión establecida correctamente.");
-        } catch (SQLException e) {
-            System.out.println("Error al conectar con la base de datos: " + e.getMessage());
-            conn = null;
-        }
+            try {
+                conn = DriverManager.getConnection(url, user, password);
+            } catch (SQLException e) {
+                System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+                conn = null;
+            }
         return conn;
     }
 
