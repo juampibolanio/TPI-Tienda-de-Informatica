@@ -102,7 +102,7 @@ public class Tienda_Informatica {
                         categoriaCRUD.mostrarCategoria();
                         break;
                     case 3:
-                        boolean repetir = true; // Bandera para mantener el ciclo hasta que la entrada sea correcta
+                        boolean repetir = true;
                         while (repetir) {
                             try {
                                 System.out.println("----- Lista de categorías actuales -----");
@@ -130,7 +130,7 @@ public class Tienda_Informatica {
                         }
                         break;
                     case 4:
-                        boolean repetir2 = true; // Bandera para mantener el ciclo hasta que la entrada sea correcta
+                        boolean repetir2 = true;
                         while (repetir2) {
                             try {
                                 System.out.println("----- Lista de categorías actuales -----");
@@ -175,7 +175,7 @@ public class Tienda_Informatica {
                 System.out.print("[*] Seleccione una opción: ");
 
                 int opcion = scanner.nextInt();
-                scanner.nextLine();  // Limpiar buffer de scanner
+                scanner.nextLine();
 
                 switch (opcion) {
                     case 1:
