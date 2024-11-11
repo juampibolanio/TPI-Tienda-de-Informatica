@@ -10,35 +10,33 @@ public class MainUI extends JFrame {
     private final JPanel panelPrincipal;
 
     public MainUI() {
-        // Configuración básica de la ventana principal
+        // Configuración de la ventana principal
         setTitle("Gestión de CRUDs");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Crear el CardLayout para manejar los diferentes paneles
+        // CardLayout para manejar paneles
         cardLayout = new CardLayout();
         panelPrincipal = new JPanel(cardLayout);
 
-        // Crear los paneles para cada CRUD
+        // Paneles de cada CRUD
         ProductoUI productoUI = new ProductoUI();
-        CategoriaUI categoriaUI = new CategoriaUI(productoUI);  // Pasamos productoUI a categoriaUI
+        CategoriaUI categoriaUI = new CategoriaUI(productoUI);
         ClienteUI clienteUI = new ClienteUI();
         ProveedorUI proveedorUI = new ProveedorUI();
         EmpleadoUI empleadoUI = new EmpleadoUI();
 
-        // Agregar los paneles al panel principal con un nombre único
+        // Agregado de los paneles al panel principal
         panelPrincipal.add(clienteUI, "Clientes");
         panelPrincipal.add(categoriaUI, "Categorias");
         panelPrincipal.add(proveedorUI, "Proveedores");
         panelPrincipal.add(productoUI, "Productos");
         panelPrincipal.add(empleadoUI, "Empleados");
 
-        // Panel con los botones para seleccionar el CRUD
         JPanel botonesPanel = new JPanel();
-        botonesPanel.setLayout(new GridLayout(5, 1));  // Ajustar la cantidad de filas a 5 para incluir "Empleados"
+        botonesPanel.setLayout(new GridLayout(5, 1));
 
-        // Botón para mostrar clientes
         JButton clientesButton = new JButton("Clientes");
         clientesButton.addActionListener(new ActionListener() {
             @Override
@@ -48,7 +46,6 @@ public class MainUI extends JFrame {
         });
         botonesPanel.add(clientesButton);
 
-        // Botón para mostrar categorías
         JButton categoriasButton = new JButton("Categorias");
         categoriasButton.addActionListener(new ActionListener() {
             @Override
@@ -58,7 +55,6 @@ public class MainUI extends JFrame {
         });
         botonesPanel.add(categoriasButton);
 
-        // Botón para mostrar proveedores
         JButton proveedoresButton = new JButton("Proveedores");
         proveedoresButton.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +64,6 @@ public class MainUI extends JFrame {
         });
         botonesPanel.add(proveedoresButton);
 
-        // Botón para mostrar productos
         JButton productosButton = new JButton("Productos");
         productosButton.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +73,6 @@ public class MainUI extends JFrame {
         });
         botonesPanel.add(productosButton);
 
-        // Botón para mostrar empleados
         JButton empleadosButton = new JButton("Empleados");
         empleadosButton.addActionListener(new ActionListener() {
             @Override
@@ -86,17 +80,16 @@ public class MainUI extends JFrame {
                 cardLayout.show(panelPrincipal, "Empleados");
             }
         });
-        botonesPanel.add(empleadosButton);  // Agregar el botón de "Empleados"
+        botonesPanel.add(empleadosButton);
 
-        // Layout de la ventana principal
         setLayout(new BorderLayout());
-        add(botonesPanel, BorderLayout.WEST);  // Panel con los botones en el lado izquierdo
-        add(panelPrincipal, BorderLayout.CENTER);  // Panel donde cambian los CRUDs
+        add(botonesPanel, BorderLayout.WEST);
+        add(panelPrincipal, BorderLayout.CENTER);
 
         setVisible(true);
     }
 
-    // Método principal para iniciar la aplicación
+    // método para ejecutar la aplicación
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new MainUI();

@@ -32,17 +32,17 @@ public class CategoriaUI extends JPanel {
         nombreField = new JTextField();
         formularioPanel.add(nombreField);
 
-        formularioPanel.add(new JLabel("ID Categoria (para actualizar/eliminar):"));
+        formularioPanel.add(new JLabel("ID Categoría (para actualizar/eliminar):"));
         idCategoriaField = new JTextField();
         formularioPanel.add(idCategoriaField);
 
-        JButton agregarButton = new JButton("Agregar Categoria");
+        JButton agregarButton = new JButton("Agregar Categoría");
         formularioPanel.add(agregarButton);
 
-        JButton actualizarButton = new JButton("Actualizar Categoria");
+        JButton actualizarButton = new JButton("Actualizar Categoría");
         formularioPanel.add(actualizarButton);
 
-        JButton eliminarButton = new JButton("Eliminar Categoria");
+        JButton eliminarButton = new JButton("Eliminar Categoría");
         formularioPanel.add(eliminarButton);
 
         tablaCategorias = new JTable();
@@ -50,7 +50,7 @@ public class CategoriaUI extends JPanel {
         DefaultTableModel model = new DefaultTableModel(new Object[]{"IdCategoria", "Nombre"}, 0);
         tablaCategorias.setModel(model);
 
-        // Acción para agregar una categoría
+        // método para agregar una categoría
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,15 +58,15 @@ public class CategoriaUI extends JPanel {
                 if (!nombre.isEmpty()) {
                     categoriaCRUD.agregarCategoria(nombre);
                     cargarCategorias();
-                    productoUI.cargarCategorias();  // Actualizamos las categorías en ProductoUI
-                    JOptionPane.showMessageDialog(null, "Categoría agregada con éxito.");  // Mensaje de éxito
+                    productoUI.cargarCategorias();
+                    JOptionPane.showMessageDialog(null, "Categoría agregada con éxito.");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre de la categoría.");
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre de la categoría.");
                 }
             }
         });
 
-        // Acción para actualizar una categoría
+        // método para actualizar una categoría
         actualizarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,15 +78,15 @@ public class CategoriaUI extends JPanel {
                         categoriaCRUD.actualizarCategoria(nombre, idcategoria);
                         cargarCategorias();
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Por favor ingrese un ID de categoría válido.");
+                        JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID de categoría válido.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese tanto el nombre como el ID de la categoría.");
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese tanto el nombre como el ID de la categoría.");
                 }
             }
         });
 
-        // Acción para eliminar una categoría
+        // método para eliminar una categoría
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,18 +95,17 @@ public class CategoriaUI extends JPanel {
                     try {
                         int idCategoria = Integer.parseInt(idCategoriaText);
 
-                        // Mostrar mensaje de confirmación antes de eliminar
                         if (confirmarEliminacion(idCategoria)) {
                             categoriaCRUD.eliminarCategoria(idCategoria);
                             cargarCategorias();
-                            productoUI.cargarCategorias();  // Actualizamos las categorías en ProductoUI después de eliminar
-                            JOptionPane.showMessageDialog(null, "Categoría eliminada con éxito.");  // Mensaje de éxito
+                            productoUI.cargarCategorias();
+                            JOptionPane.showMessageDialog(null, "Categoría eliminada con éxito.");
                         }
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Por favor ingrese un ID de categoría válido.");
+                        JOptionPane.showMessageDialog(null, "Por favor, ingrese un ID de categoría válido.");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese el ID de la categoría que desea eliminar.");
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese el ID de la categoría que desea eliminar.");
                 }
             }
         });
@@ -118,7 +117,7 @@ public class CategoriaUI extends JPanel {
         cargarCategorias();
     }
 
-    // Método para confirmar la eliminación de la categoría
+    // método para confirmar la eliminación de la categoría
     private boolean confirmarEliminacion(int idCategoria) {
         Object[] options = { "Sí", "No" };
         int respuesta = JOptionPane.showOptionDialog(
@@ -129,12 +128,12 @@ public class CategoriaUI extends JPanel {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[0]  // El primer botón ("Sí")
+                options[0]
         );
-        return respuesta == 0;  // 0 para "Sí", 1 para "No"
+        return respuesta == 0;
     }
 
-    // Método para cargar las categorías desde la base de datos
+    // método para cargar las categorías desde la base de datos
     private void cargarCategorias() {
         DefaultTableModel model = (DefaultTableModel) tablaCategorias.getModel();
         model.setRowCount(0);
@@ -150,7 +149,7 @@ public class CategoriaUI extends JPanel {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al cargar las categorías desde la base de datos.");
+            JOptionPane.showMessageDialog(this, "[!] Error al cargar las categorías desde la base de datos.");
         }
     }
 }

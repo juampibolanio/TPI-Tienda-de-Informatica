@@ -19,12 +19,10 @@ public class ClienteUI extends JPanel {
     private final JTextField telefonoField;
     ConexionBD conexion = new ConexionBD();
 
-    // Constructor de la interfaz gráfica
     public ClienteUI() {
 
         setSize(700, 600);
 
-        // Panel de formulario
         JPanel formularioPanel = new JPanel();
         formularioPanel.setLayout(new GridLayout(5, 3));
 
@@ -50,13 +48,12 @@ public class ClienteUI extends JPanel {
         JButton eliminarButton = new JButton("Eliminar Cliente");
         formularioPanel.add(eliminarButton);
 
-        // Tabla para mostrar los clientes
         tablaClientes = new JTable();
         JScrollPane scrollPane = new JScrollPane(tablaClientes);
         DefaultTableModel model = new DefaultTableModel(new Object[]{"idCliente", "Nombre", "Apellido", "Email", "Telefono"}, 0);
         tablaClientes.setModel(model);
 
-        // Acción para eliminar un cliente
+        // método para eliminar un cliente
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +65,7 @@ public class ClienteUI extends JPanel {
                             JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito.");
                             cargarClientes();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Error al eliminar el cliente.");
+                            JOptionPane.showMessageDialog(null, "[!] Error al eliminar el cliente.");
                         }
                     }
                 } else {
@@ -77,7 +74,7 @@ public class ClienteUI extends JPanel {
             }
         });
 
-        // Acción para agregar un cliente
+        // método para agregar un cliente
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,12 +86,11 @@ public class ClienteUI extends JPanel {
                     JOptionPane.showMessageDialog(null, "Cliente agregado con éxito.");
                     cargarClientes();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al agregar el cliente.");
+                    JOptionPane.showMessageDialog(null, "[!] Error al agregar el cliente.");
                 }
             }
         });
 
-        // Layout de la ventana
         setLayout(new BorderLayout());
         add(formularioPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
@@ -102,7 +98,7 @@ public class ClienteUI extends JPanel {
         cargarClientes();
     }
 
-    // Método para cargar los clientes en la tabla desde la base de datos
+    // método para cargar los clientes en la tabla desde la base de datos
     private void cargarClientes() {
         DefaultTableModel model = (DefaultTableModel) tablaClientes.getModel();
         model.setRowCount(0);
@@ -113,13 +109,13 @@ public class ClienteUI extends JPanel {
         }
     }
 
-    // Método para obtener los clientes desde la base de datos
+    // método para obtener los clientes desde la base de datos
     private List<String[]> obtenerClientes() {
         List<String[]> clientes = new ArrayList<>();
         String query = "SELECT * FROM cliente";
         try (Connection conn = conexion.conectarBD()) {
             if (conn == null) {
-                throw new SQLException("No se pudo establecer la conexión con la base de datos.");
+                throw new SQLException("[!] Error No se pudo establecer la conexión con la base de datos.");
             }
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -133,12 +129,12 @@ public class ClienteUI extends JPanel {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al obtener los clientes desde la base de datos.");
+            JOptionPane.showMessageDialog(this, "[!] Error al obtener los clientes desde la base de datos.");
         }
         return clientes;
     }
 
-    // Método para agregar un nuevo cliente a la base de datos
+    // método para agregar un nuevo cliente a la base de datos
     private boolean agregarCliente(String nombre, String apellido, String email, String telefono) {
         String query = "INSERT INTO cliente (nombre, apellido, email, telefono) VALUES (?, ?, ?, ?)";
         try (Connection conn = conexion.conectarBD();
@@ -154,7 +150,7 @@ public class ClienteUI extends JPanel {
         }
     }
 
-    // Método para eliminar un cliente de la base de datos
+    // método para eliminar un cliente de la base de datos
     private boolean eliminarCliente(String idcliente) {
         String query = "DELETE FROM cliente WHERE idcliente = ?";
         try (Connection conn = conexion.conectarBD();
@@ -167,7 +163,7 @@ public class ClienteUI extends JPanel {
         }
     }
 
-    // Método para confirmar la eliminación de un cliente
+    // método para confirmar la eliminación de un cliente
     private boolean confirmarEliminacion(String idcliente) {
         Object[] options = { "Sí", "No" };
         int respuesta = JOptionPane.showOptionDialog(
@@ -178,8 +174,8 @@ public class ClienteUI extends JPanel {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[0]  // El primer botón ("Sí")
+                options[0]
         );
-        return respuesta == 0;  // 0 para "Sí", 1 para "No"
+        return respuesta == 0;
     }
 }

@@ -67,7 +67,6 @@ public class ProductoUI extends JPanel {
                 String marca = marcaField.getText();
                 String categoriaSeleccionada = (String) categoriaComboBox.getSelectedItem();
 
-                // Verifica que se haya seleccionado una categoría válida
                 if (categoriaSeleccionada == null || categoriaSeleccionada.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor, seleccione una categoría.");
                     return;
@@ -89,7 +88,7 @@ public class ProductoUI extends JPanel {
                     } else {
                         productoCRUD.agregarProducto(nombre, precio, stock, marca, idcategoria);
                         cargarProductos();
-                        JOptionPane.showMessageDialog(null, "Producto agregado con éxito."); // Mensaje de éxito
+                        JOptionPane.showMessageDialog(null, "Producto agregado con éxito.");
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Precio y Stock deben ser números válidos.");
@@ -109,14 +108,13 @@ public class ProductoUI extends JPanel {
                         try {
                             idProducto = Integer.parseInt((String) idProductoObj);
                         } catch (NumberFormatException ex) {
-                            JOptionPane.showMessageDialog(null, "Error al obtener el ID del producto.");
+                            JOptionPane.showMessageDialog(null, "[!] Error al obtener el ID del producto.");
                         }
                     } else if (idProductoObj instanceof Integer) {
                         idProducto = (Integer) idProductoObj;
                     }
 
                     if (idProducto != -1) {
-                        // Mostrar mensaje de confirmación con botones en español
                         Object[] options = { "Sí", "No" };
                         int confirm = JOptionPane.showOptionDialog(
                                 null,
@@ -126,17 +124,16 @@ public class ProductoUI extends JPanel {
                                 JOptionPane.QUESTION_MESSAGE,
                                 null,
                                 options,
-                                options[0]  // El primer botón ("Sí")
+                                options[0]
                         );
 
-                        // Si el usuario hace clic en "Sí"
                         if (confirm == JOptionPane.YES_OPTION) {
                             productoCRUD.eliminarProducto(idProducto);
-                            cargarProductos();  // Recargar los productos después de eliminar
-                            JOptionPane.showMessageDialog(null, "Producto eliminado con éxito."); // Mensaje de éxito
+                            cargarProductos();
+                            JOptionPane.showMessageDialog(null, "Producto eliminado con éxito.");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Por favor seleccione un producto válido para eliminar.");
+                        JOptionPane.showMessageDialog(null, "Por favor, seleccione un producto válido para eliminar.");
                     }
                 }
             }
@@ -147,7 +144,7 @@ public class ProductoUI extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         cargarProductos();
-        cargarCategorias();  // Cargar categorías al inicio
+        cargarCategorias();
     }
 
     private void cargarProductos() {
@@ -172,7 +169,7 @@ public class ProductoUI extends JPanel {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al cargar los productos desde la base de datos.");
+            JOptionPane.showMessageDialog(this, "[!] Error al cargar los productos desde la base de datos.");
         }
     }
 
@@ -187,7 +184,7 @@ public class ProductoUI extends JPanel {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al cargar las categorías.");
+            JOptionPane.showMessageDialog(this, "[!] Error al cargar las categorías.");
         }
     }
 
@@ -204,6 +201,6 @@ public class ProductoUI extends JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;  // Si no se encuentra la categoría, retornamos -1
+        return -1;
     }
 }

@@ -20,14 +20,11 @@ public class ProveedorUI extends JPanel {
     private ProveedorCRUD proveedorCRUD;
     ConexionBD conexion = new ConexionBD();
 
-    // Constructor de la interfaz gráfica
     public ProveedorUI() {
-        // Conexión a la base de datos
         proveedorCRUD = new ProveedorCRUD(conexion);
 
         setSize(700, 600);
 
-        // Panel de formulario
         JPanel formularioPanel = new JPanel();
         formularioPanel.setLayout(new GridLayout(4, 2));
 
@@ -49,13 +46,12 @@ public class ProveedorUI extends JPanel {
         JButton eliminarButton = new JButton("Eliminar Proveedor");
         formularioPanel.add(eliminarButton);
 
-        // Tabla para mostrar los proveedores
         tablaProveedores = new JTable();
         JScrollPane scrollPane = new JScrollPane(tablaProveedores);
         DefaultTableModel model = new DefaultTableModel(new Object[]{"IdProveedor", "Nombre", "Teléfono", "Email"}, 0);
         tablaProveedores.setModel(model);
 
-        // Acción para agregar un proveedor
+        // método para agregar un proveedor
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,31 +59,29 @@ public class ProveedorUI extends JPanel {
                 String telefono = telefonoField.getText();
                 String email = emailField.getText();
 
-                // Validar campos
                 if (nombre.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Todos los campos deben ser llenados.");
                 } else {
                     proveedorCRUD.agregarProveedor(nombre, telefono, email);
                     cargarProveedores();
-                    JOptionPane.showMessageDialog(null, "Proveedor agregado con éxito."); // Mensaje de éxito
+                    JOptionPane.showMessageDialog(null, "Proveedor agregado con éxito.");
                 }
             }
         });
 
-        // Acción para eliminar un proveedor
+        // método para eliminar un proveedor
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = tablaProveedores.getSelectedRow();
                 if (selectedRow >= 0) {
-                    // Obtiene el idProveedor como String y lo convierte a Integer
                     String idProveedorStr = (String) tablaProveedores.getModel().getValueAt(selectedRow, 0);
                     try {
-                        int idProveedor = Integer.parseInt(idProveedorStr);  // Convierte de String a int
+                        int idProveedor = Integer.parseInt(idProveedorStr);
                         if (confirmarEliminacion(idProveedor)) {
                             proveedorCRUD.eliminarProveedor(idProveedor);
                             cargarProveedores();
-                            JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito."); // Mensaje de éxito
+                            JOptionPane.showMessageDialog(null, "Proveedor eliminado con éxito.");
                         }
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "El ID del proveedor no es válido.");
@@ -98,7 +92,6 @@ public class ProveedorUI extends JPanel {
             }
         });
 
-        // Layout de la ventana
         setLayout(new BorderLayout());
         add(formularioPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
@@ -106,7 +99,7 @@ public class ProveedorUI extends JPanel {
         cargarProveedores();
     }
 
-    // Método para cargar los proveedores en la tabla desde la base de datos
+    // método para cargar los proveedores en la tabla desde la base de datos
     private void cargarProveedores() {
         DefaultTableModel model = (DefaultTableModel) tablaProveedores.getModel();
         model.setRowCount(0);
@@ -117,7 +110,7 @@ public class ProveedorUI extends JPanel {
         }
     }
 
-    // Método para obtener los proveedores desde la base de datos
+    // método para obtener los proveedores desde la base de datos
     private List<String[]> obtenerProveedores() {
         List<String[]> proveedores = new ArrayList<>();
         String query = "SELECT idproveedor, nombre, telefono, email FROM proveedor";
@@ -137,9 +130,8 @@ public class ProveedorUI extends JPanel {
         return proveedores;
     }
 
-    // Método para confirmar la eliminación de un proveedor
+    // método para confirmar la eliminación de un proveedor
     private boolean confirmarEliminacion(int idproveedor) {
-        // Uso de showOptionDialog para personalizar los botones de confirmación
         Object[] opciones = {"Sí", "No"};
         int respuesta = JOptionPane.showOptionDialog(
                 null,
@@ -149,7 +141,7 @@ public class ProveedorUI extends JPanel {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 opciones,
-                opciones[0] // El primer botón ("Sí")
+                opciones[0]
         );
         return respuesta == JOptionPane.YES_OPTION;
     }

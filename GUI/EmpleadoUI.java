@@ -21,14 +21,11 @@ public class EmpleadoUI extends JPanel {
     private EmpleadoCRUD empleadoCRUD;
     ConexionBD conexion = new ConexionBD();
 
-    // Constructor de la interfaz gráfica
     public EmpleadoUI() {
-        // Conexión a la base de datos
         empleadoCRUD = new EmpleadoCRUD(conexion);
 
         setSize(700, 600);
 
-        // Panel de formulario
         JPanel formularioPanel = new JPanel();
         formularioPanel.setLayout(new GridLayout(5, 2));
 
@@ -54,13 +51,12 @@ public class EmpleadoUI extends JPanel {
         JButton eliminarButton = new JButton("Eliminar Empleado");
         formularioPanel.add(eliminarButton);
 
-        // Tabla para mostrar los empleados
         tablaEmpleados = new JTable();
         JScrollPane scrollPane = new JScrollPane(tablaEmpleados);
         DefaultTableModel model = new DefaultTableModel(new Object[]{"idEmpleado", "Nombre", "Apellido", "Puesto", "Telefono"}, 0);
         tablaEmpleados.setModel(model);
 
-        // Acción para agregar un empleado
+        // método para agregar un empleado
         agregarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,23 +70,22 @@ public class EmpleadoUI extends JPanel {
                 } else {
                     empleadoCRUD.agregarEmpleados(nombre, apellido, puesto, telefono);
                     cargarEmpleados();
-                    JOptionPane.showMessageDialog(null, "Empleado agregado con éxito."); // Mensaje de éxito
+                    JOptionPane.showMessageDialog(null, "Empleado agregado con éxito.");
                 }
             }
         });
 
-        // Acción para eliminar un empleado
+        // método para eliminar un empleado
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = tablaEmpleados.getSelectedRow();
                 if (selectedRow >= 0) {
-                    // Convertir correctamente el valor de la celda a Integer
                     int idempleado = Integer.parseInt(tablaEmpleados.getModel().getValueAt(selectedRow, 0).toString());
                     if (confirmarEliminacion(idempleado)) {
                         empleadoCRUD.eliminarEmpleados(idempleado);
                         cargarEmpleados();
-                        JOptionPane.showMessageDialog(null, "Empleado eliminado con éxito."); // Mensaje de éxito
+                        JOptionPane.showMessageDialog(null, "Empleado eliminado con éxito.");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un empleado de la tabla para eliminarlo.");
@@ -98,7 +93,6 @@ public class EmpleadoUI extends JPanel {
             }
         });
 
-        // Layout de la ventana
         setLayout(new BorderLayout());
         add(formularioPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
@@ -106,7 +100,7 @@ public class EmpleadoUI extends JPanel {
         cargarEmpleados();
     }
 
-    // Método para cargar los empleados en la tabla desde la base de datos
+    // método para cargar los empleados en la tabla desde la base de datos
     private void cargarEmpleados() {
         DefaultTableModel model = (DefaultTableModel) tablaEmpleados.getModel();
         model.setRowCount(0);
@@ -117,7 +111,7 @@ public class EmpleadoUI extends JPanel {
         }
     }
 
-    // Método para obtener los empleados desde la base de datos
+    // método para obtener los empleados desde la base de datos
     private List<String[]> obtenerEmpleados() {
         List<String[]> empleados = new ArrayList<>();
         String query = "SELECT * FROM empleado";
@@ -138,7 +132,7 @@ public class EmpleadoUI extends JPanel {
         return empleados;
     }
 
-    // Método para confirmar la eliminación de un empleado
+    // método para confirmar la eliminación de un empleado
     private boolean confirmarEliminacion(int idempleado) {
         Object[] options = { "Sí", "No" };
         int respuesta = JOptionPane.showOptionDialog(
@@ -149,8 +143,8 @@ public class EmpleadoUI extends JPanel {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 options,
-                options[0]  // El primer botón ("Sí")
+                options[0]
         );
-        return respuesta == 0;  // 0 para "Sí", 1 para "No"
+        return respuesta == 0;
     }
 }
