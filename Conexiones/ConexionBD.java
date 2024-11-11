@@ -19,7 +19,7 @@ public class ConexionBD {
 
     public ConexionBD() {
         Properties props = new Properties();
-        try (FileInputStream input = new FileInputStream("TPI-Tienda-de-Informatica/config/database.properties")) {
+        try (FileInputStream input = new FileInputStream("config/database.properties")) {
             props.load(input);
             url = props.getProperty("db.url");
             user = props.getProperty("db.user");

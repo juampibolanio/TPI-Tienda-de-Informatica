@@ -35,16 +35,16 @@ public class ProveedorCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-
-            System.out.printf("%-20s%-15s%-30s%n", "Nombre", "Teléfono", "Email");
+            System.out.printf("%-20s%-20s%-15s%-30s%n", "IDProveedor", "Nombre", "Teléfono", "Email");
             System.out.println("---------------------------------------------------------------");
 
 
             while (rs.next()) {
+                int idproveedor = rs.getInt("idproveedor");
                 String nombre = rs.getString("nombre");
                 String telefono = rs.getString("telefono");
                 String email = rs.getString("email");
-                System.out.printf("%-20s%-15s%-30s%n", nombre, telefono, email);
+                System.out.printf("%-20s%-20s%-15s%-30s%n", idproveedor, nombre, telefono, email);
             }
 
         } catch (SQLException e) {
@@ -63,6 +63,7 @@ public class ProveedorCRUD {
             psmt.setString(3, email);
             psmt.setInt(4, idproveedor);
             int rowCount = psmt.executeUpdate();
+            System.out.println("Proveedor actualizado correctamente");
             System.out.println("Número de filas afectadas: " + rowCount);
         }catch (SQLException e){
             System.out.println("Error al conectar con la base de datos: " + e.getMessage());
@@ -76,10 +77,24 @@ public class ProveedorCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setInt(1, idproveedor);
             int rowCount = psmt.executeUpdate();
+            System.out.println("Proveedor eliminado correctamente");
             System.out.println("Número de filas afectadas: " + rowCount);
         }catch (SQLException e){
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
     }
 
+    public boolean existeProveedor(int idProveedor) {
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM proveedor WHERE idproveedor = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idProveedor);
+            ResultSet rs = psmt.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

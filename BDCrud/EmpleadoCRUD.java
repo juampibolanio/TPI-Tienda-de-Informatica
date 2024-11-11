@@ -37,16 +37,17 @@ public class EmpleadoCRUD {
             ResultSet rs = psmt.executeQuery();
 
 
-            System.out.printf("%-20s%-20s%-20s%-15s%n", "Nombre", "Apellido", "Puesto", "Teléfono");
-            System.out.println("-------------------------------------------------------------------");
+            System.out.printf("%-20s%-20s%-20s%-20s%-15s%n", "IDEmpleado", "Nombre", "Apellido", "Puesto", "Teléfono");
+            System.out.println("-----------------------------------------------------------------------------------------");
 
 
             while (rs.next()) {
+                int idempleado = rs.getInt("idempleado");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String puesto = rs.getString("puesto");
                 String telefono = rs.getString("telefono");
-                System.out.printf("%-20s%-20s%-20s%-15s%n", nombre, apellido, puesto, telefono);
+                System.out.printf("%-20s%-20s%-20s%-20s%-15s%n", idempleado, nombre, apellido, puesto, telefono);
             }
 
         } catch (SQLException e) {
@@ -85,4 +86,35 @@ public class EmpleadoCRUD {
         }
     }
 
+    public boolean existeEmpleado(int idEmpleado) {
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM empleado WHERE idempleado = ?"; //fijarse en la "idempleado"
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idEmpleado);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean esTelefonoDuplicado(String telefono) {
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM empleado WHERE telefono = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, telefono);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

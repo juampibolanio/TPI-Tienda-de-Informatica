@@ -35,16 +35,17 @@ public class ClienteCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             ResultSet rs = psmt.executeQuery();
 
-            System.out.printf("%-20s%-20s%-30s%-15s%n", "Nombre", "Apellido", "Email", "Teléfono");
-            System.out.println("--------------------------------------------------------------------------");
+            System.out.printf("%-20s%-20s%-20s%-30s%-15s%n","IDCliente", "Nombre", "Apellido", "Email", "Teléfono");
+            System.out.println("--------------------------------------------------------------------------------------------------------");
 
 
             while (rs.next()) {
+                int idcliente = rs.getInt("idcliente");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
                 String telefono = rs.getString("telefono");
-                System.out.printf("%-20s%-20s%-30s%-15s%n", nombre, apellido, email, telefono);
+                System.out.printf("%-20s%-20s%-20s%-30s%-15s%n", idcliente, nombre, apellido, email, telefono);
             }
 
         } catch (SQLException e) {
@@ -81,6 +82,39 @@ public class ClienteCRUD {
         }catch (SQLException e){
             System.out.println("Error al conectar a la base de datos: "+ e.getMessage());
         }
+    }
+
+    public boolean existeCliente(int idCliente) {
+        String query = "SELECT COUNT(*) FROM cliente WHERE idcliente = ?";
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM cliente WHERE idcliente = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idCliente);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean esEmailDuplicado(String email) {
+        try  {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM cliente WHERE email = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, email);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

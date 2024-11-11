@@ -75,4 +75,37 @@ public class CategoriaCRUD {
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
     }
+
+    public boolean existeCategoria(int idCategoria) {
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM categoria WHERE idcategoria = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idCategoria);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Si el conteo es mayor a 0, existe
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean esNombreDuplicado(String nombreCategoria) {
+        try  {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM categoria WHERE nombre = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setString(1, nombreCategoria);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Si el conteo es mayor a 0, el nombre está duplicado
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

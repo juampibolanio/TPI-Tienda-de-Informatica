@@ -40,7 +40,7 @@ public class ProductoCRUD {
 
 
             System.out.printf("%-15s%-15s%-10s%-10s%-20s%-20s%n", "IdProducto", "Nombre", "Precio", "Stock", "Marca", "Categoría");
-            System.out.println("--------------------------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
 
 
             while (rs.next()) {
@@ -49,7 +49,7 @@ public class ProductoCRUD {
                 double precio = rs.getDouble("precio");
                 int stock = rs.getInt("stock");
                 String marca = rs.getString("marca");
-                String categoria = rs.getString("nombre");
+                String categoria = rs.getString("c.nombre");
                 System.out.printf("%-10d%-20s%-10.2f%-10d%-20s%-20s%n", idproducto, nombre, precio, stock, marca, categoria);
             }
 
@@ -71,6 +71,7 @@ public class ProductoCRUD {
             psmt.setInt(5, idcategoria);
             psmt.setInt(6, idproducto);
             int rowCount = psmt.executeUpdate();
+            System.out.println("Producto actualizado correctamente.");
             System.out.println("Número de filas afectadas: " + rowCount);
         }catch(SQLException e){
             System.out.println("Error al conectar con la base de datos: "+ e.getMessage());
@@ -84,9 +85,38 @@ public class ProductoCRUD {
             PreparedStatement psmt = conn.prepareStatement(sql);
             psmt.setInt(1, idproducto);
             int rowCount = psmt.executeUpdate();
+            System.out.println("Producto eliminado correctamente.");
             System.out.println("Número de filas afectadas: " + rowCount);
         }catch (SQLException e){
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
+    }
+
+    public boolean existeProducto(int idProducto) {
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM producto WHERE idproducto = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idProducto);
+            ResultSet rs = psmt.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean existeCategoria(int idCategoria) {
+        try {
+            Connection conn = conexion.conectarBD();
+            String sql = "SELECT COUNT(*) FROM categoria WHERE idcategoria = ?";
+            PreparedStatement psmt = conn.prepareStatement(sql);
+            psmt.setInt(1, idCategoria);
+            ResultSet rs = psmt.executeQuery();
+            return rs.next() && rs.getInt(1) > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
